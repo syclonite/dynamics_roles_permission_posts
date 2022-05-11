@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Permission name:</strong>
+  <%= @permission.permission_name %>
+</p>
+
+<p>
+  <strong>Permission slug:</strong>
+  <%= @permission.permission_slug %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @permission.status %>
+</p>
+
+<!--<p>-->
+<!--  <strong>User:</strong>-->
+  <%#= @permission.user_id %>
+<!--</p>-->
+
+<p>
+  <strong>Flag:</strong>
+  <%= @permission.flag %>
+</p>
+
+<%= link_to 'Edit', edit_permission_path(@permission) %> |
+<%= link_to 'Back', permissions_path %>

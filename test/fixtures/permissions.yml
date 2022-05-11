@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  permission_name: MyString
+  permission_slug: MyString
+  status: 1
+  user_id: 1
+  flag: MyString
+
+two:
+  permission_name: MyString
+  permission_slug: MyString
+  status: 1
+  user_id: 1
+  flag: MyString

@@ -1,0 +1,42 @@
+This is a Dynamics ROLES & Permission based system in Ruby on Rails
+IT can be used most of the projects that needs roles and permissions
+so plz check it out and update it properly. And before use PLZ CHECK THE ABILITY MODEL IN MODEL FOLDER FOR more UNDERSTANDING
+
+Features:
+        *.Login & Registration
+        *.Email for password reset and configured for Mailtrap
+        * Basic Responsive design
+        * Soft delete & restoration
+        * Dynamics Roles and permission...(now plz remember dynamics permission doesn't exists
+                                        you can research it but i have done a simple way for a dynamic permission
+                                        where it will check whether user have that permission or not it is easily customizeable
+                                        based on projects needs
+                                        )
+Now Based on the projects Roles & permission
+
+Role Admin : he can do all things and all permissions
+
+Role manager -> permission(he can approve post and he can view his only page, and read the posts)
+Role content-manager -> permission(he can destroy the approved post and read the posts and cannot edit or approve the posts)
+Role employee -> permission(he can read,edit,delete,create his own the posts)
+Role hr-manager -> permission(he can approve employee that is created by executive or admin and he can view his only page,
+                                and read the employee lists)
+Role executives -> permission(he can create an employee and give the roles & permissions)
+Role jr-executives -> permission(he can edit & delete employee profiles )
+
+GEM used in this project ->
+                             # Use Cancancan for permission
+                              gem 'cancancan', '~> 3.3'
+
+                              # Use Kaminari for pagination
+                              gem 'kaminari'
+
+                              # Use Discard for Soft Delete & Restoration
+                              gem 'discard', '~> 1.2'
+
+                              # Reduces boot times through caching; required in config/boot.rb
+                              gem 'bootsnap', '>= 1.4.2', require: false
+
+                              # Use Devise for authentication and authorization
+                              gem 'devise'
+

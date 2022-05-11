@@ -1,0 +1,66 @@
+<!--<h1>Editing Post</h1>-->
+
+<%#= render 'form', post: @post %>
+
+
+<% if has_role(current_user,"manager"||"admin")%>
+  <%= render "posts/manager_approve_post", post: @post %>
+<% end %>
+
+<%= form_for @post do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% unless has_role(current_user,"manager") %>
+
+   <h1>Editing Post</h1> <br>
+
+  <div class="field">
+    <%= form.label :post_title %>
+    <% if has_role(current_user,"admin")  %>
+    <%= form.text_field :post_title, disabled:true %>
+    <% else %>
+      <%= form.text_field :post_title %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :slug %>
+    <% if has_role(current_user,"admin")  %>
+      <%= form.text_field :slug, disabled:true %>
+    <% else %>
+      <%= form.text_field :slug %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </div>
+
+
+  <% if has_role(current_user,"admin") %>
+    <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status, [["Approved", '1'], ["Not Approved", '0']] ,{:prompt => 'Select One'}%>
+    </div>
+  <% end %>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+
+    <%= link_to 'Show', @post %> |
+    <%= link_to 'Back', posts_path %>
+
+  <% end %>
+<% end %>

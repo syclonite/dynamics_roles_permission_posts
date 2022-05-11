@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+<h1>Users</h1> <br>
+<%#= ManageAuthorize.new.user_info(current_user.id) %>
+<h5>
+  <%=form_tag users_path, method: :get do %>
+    <%= select_tag("approved_users_status",options_for_select([["Approved",'1'],["Not Approved",'0'],["New User",'']]), {:prompt => "Select One"})%>
+    <%= submit_tag 'Search' %>
+  <% end %></h5>
+<%= button_to "Reset", users_path, method: :get%>
+
+<div class="table-responsive">
+  <table class="table table-dark table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <% if has_role(current_user,"admin") %>
+        <th>Slug</th>
+      <% end %>
+      <th>Email</th>
+      <th>Role</th>
+      <!--      <th>Permission</th>-->
+      <!--      <th>Encrypted password</th>-->
+      <th>Employee Status</th>
+      <th>Approved By</th>
+      <% if has_role(current_user,"admin") %>
+        <th>Deleted</th>
+      <% end %>
+      <th colspan="3">Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <% if has_role(current_user,"admin") %>
+          <td><%= user.slug  %></td>
+        <% end %>
+        <td><%= user.email %></td>
+        <td><%= user.roles.pluck(:role_name).uniq %></td>
+        <!--        <td><%#= user.permissions.pluck(:permission_name).uniq %></td>-->
+        <!--        <td><%#= user.encrypted_password %></td>-->
+        <% if user.status == 1 %>
+          <td><%= "Approved" %> </td>
+        <% elsif user.status == 0 %>
+          <td> <%= "Not Approved" %></td>
+        <% else %>
+          <td> <%= "New User" %></td>
+        <% end %>
+        <td><%= UserRolePermission.where(user_id: user.approved_by).includes(:role).pluck(:role_name).uniq %></td>
+        <% if has_role(current_user,"admin") %>
+          <td>
+            <% if user.discarded? %>
+              <%= check_box_tag nil, nil, false,{onclick:"restore_record()", id:'checkbox_tag'}%>
+              <%= button_to 'Save', restore_record_users_path(restore:user.id), {style: "display:none", id:'restore_data'}%>
+            <% end %>
+          </td>
+        <% end %>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @users %>
+<br>
+
+<%= link_to 'New User', new_user_path %>
+
+<script>
+    function restore_record(){
+        var checkbox = document.getElementById('checkbox_tag')
+        var restore_button = document.getElementById('restore_data')
+        if (checkbox.checked == true){
+            restore_button.style.display = "inline-block"
+        }else{
+            restore_button.style.display = "none"
+            console.log("not checked")
+        }
+    }
+</script>

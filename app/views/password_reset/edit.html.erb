@@ -1,0 +1,10 @@
+<%= form_with model: @user, url:password_reset_edit_path(token: params[:token]), method: :put, local: true do |form| %>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Reset Password" %>
+  </div>
+<% end %>

@@ -1,0 +1,43 @@
+<h1>Editing Role</h1>
+
+<%#= render 'form', role: @role %>
+<%= form_for @role do |form| %>
+  <% if @role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
+
+      <ul>
+        <% @role.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :role_name %>
+    <%= form.text_field :role_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :slug %>
+    <%= form.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, [["Approved", '1'], ["Not Approved", '0']] ,{:prompt => 'Select One'}%>
+  </div>
+
+  <div class="field">
+    <%= form.label :flag %>
+    <%= form.text_field :flag %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @role %> |
+<%= link_to 'Back', roles_path %>

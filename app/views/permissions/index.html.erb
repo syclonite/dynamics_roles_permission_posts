@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Permissions</h1>
+  <%=form_tag permissions_path, method: :get do %>
+    <%= select_tag("approved_permissions_status",options_for_select([["Approved",'1'],["Not Approved",'0'],["New Permissions",'']]), {:prompt => "Select One"})%>
+    <%= submit_tag 'Search' %>
+  <% end %></h5>
+  <%= button_to "Reset", permissions_path, method: :get%>
+<div class="table-responsive">
+  <table class="table table-dark table-striped">
+    <thead>
+    <tr>
+      <th>Permission name</th>
+      <th>Permission slug</th>
+      <th>Status</th>
+      <th>Deleted</th>
+      <th>Flag</th>
+      <th>Restore Record</th>
+      <th colspan="3">Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @permissions.each do |permission| %>
+      <tr>
+        <td><%= permission.permission_name %></td>
+        <td><%= permission.permission_slug %></td>
+        <% if permission.status == 1 %>
+          <td><%= "Approved" %> </td>
+        <% elsif permission.status == 0 %>
+          <td> <%= "Not Approved" %></td>
+        <% else %>
+          <td> <%= "New User" %></td>
+        <% end %>
+        <td><%= permission.discarded? ? 'deleted':'not deleted'%></td>
+        <td><%= permission.flag %></td>
+        <td><% if permission.discarded? %>
+            <%= check_box_tag nil, nil, false,{onclick:"restore_record()", id:'checkbox_tag'}%>
+            <%= button_to 'Save', restore_record_permissions_path(restore:permission.id), {style: "display:none", id:'restore_data'}%>
+          <% end %></td>
+        <td><%= link_to 'Show', permission %></td>
+        <td><%= link_to 'Edit', edit_permission_path(permission) %></td>
+        <td><%= link_to 'Destroy', permission, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @permissions %>
+<br>
+
+<%= link_to 'New Permission', new_permission_path %>
+
+<script>
+    function restore_record(){
+        var checkbox = document.getElementById('checkbox_tag')
+        var restore_button = document.getElementById('restore_data')
+        if (checkbox.checked == true){
+            restore_button.style.display = "inline-block"
+        }else{
+            restore_button.style.display = "none"
+            console.log("not checked")
+        }
+    }
+</script>

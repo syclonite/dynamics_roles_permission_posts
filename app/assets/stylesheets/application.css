@@ -1,0 +1,186 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+html, body {
+    height: 100%;
+    margin: auto;
+    font-family: "Arial", sans-serif;
+    background: #CCCCCC;
+}
+
+/*
+ * Sidebar
+ */
+.sidebar {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    /* Behind the navbar */
+    padding: 20px 0 0;
+    /* Height of navbar */
+    /*box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);*/
+}
+@media (max-width: 767.98px) {
+    .sidebar {
+        top: 9rem;
+    }
+}
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+}
+.sidebar .nav-link {
+    font-weight: bold;
+    color: #333;
+    font-size: large;
+}
+
+.sidebar .nav-link {
+    color:#000000;
+    text-transform: uppercase;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    color: #ffffff;
+}
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+    font-size: 2rem;
+    padding-left: 2px;
+    /*padding-top: .75rem;*/
+    /*padding-bottom: .75rem;*/
+    /*background-color: rgba(0, 0, 0, .25);*/
+    /*box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);*/
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color:#000000;
+}
+
+.navbar-nav .nav-item .nav-link:hover,.nav-link.active:hover{
+    color:#ffffff;
+}
+
+/*.navbar .navbar-toggler {*/
+/*    top: .25rem;*/
+/*    right: 1rem;*/
+/*}*/
+/*.navbar .form-control {*/
+/*    padding: .75rem 1rem;*/
+/*    border-width: 0;*/
+/*    border-radius: 0;*/
+/*}*/
+/*.form-control-dark {*/
+/*    color: #fff;*/
+/*    background-color: rgba(255, 255, 255, .1);*/
+/*    border-color: rgba(255, 255, 255, .1);*/
+/*}*/
+/*.form-control-dark:focus {*/
+/*    border-color: transparent;*/
+/*    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);*/
+/*}*/
+
+/*#home {*/
+/*    margin-left: 20%;*/
+/*}*/
+
+/* Navbar */
+/*#navbarSupportedContent{*/
+/*    justify-content: flex-end;*/
+/*}*/
+/*#navbarSupportedContent li{*/
+/*    font-size: large;*/
+/*}*/
+/* Navbar */
+
+
+/* Sidebar */
+/*.sidebar a, .dropdown-btn {*/
+/*    display: block;*/
+/*    color: black;*/
+/*    !*padding: 16px;*!*/
+/*    padding: 6px 8px 6px 16px;*/
+/*    text-decoration: none;*/
+/*    background: none;*/
+/*    width: 100%;*/
+/*    text-align: left;*/
+/*    cursor: pointer;*/
+/*    outline: none;*/
+/*    font-size: 20px;*/
+/*}*/
+
+/*.sidebar {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    width: 300px;*/
+/*    background-color: #f1f1f1;*/
+/*    position: absolute;*/
+/*    height: 100%;*/
+/*    overflow: auto;*/
+/*}*/
+/*.sidenav a:hover, .dropdown-btn:hover {*/
+/*    !*color: #f1f1f1;*!*/
+
+/*}*/
+/*.sidebar .active {*/
+/*    background-color: #f1f1f1;*/
+/*    !*color: white;*!*/
+/*}*/
+/*!* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content *!*/
+/*.dropdown-container {*/
+/*    display: none;*/
+/*    background-color: #f1f1f1;*/
+/*    padding-left: 8px;*/
+/*}*/
+/*.fa-caret-down {*/
+/*    float: right;*/
+/*    padding-right: 8px;*/
+/*}*/
+
+/*@media screen and (max-width: 700px) {*/
+/*    .sidebar {*/
+/*        width: 100%;*/
+/*        height: auto;*/
+/*        position: relative;*/
+/*    }*/
+/*    .sidebar a {float: left;}*/
+/*    div.content {margin-left: 0;}*/
+/*}*/
+
+/*@media screen and (max-width: 400px) {*/
+/*    .sidebar a {*/
+/*        text-align: center;*/
+/*        float: none;*/
+/*    }*/
+/*}*/
+
+/* Sidebar */

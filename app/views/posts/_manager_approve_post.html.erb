@@ -1,0 +1,38 @@
+<h1>Post Approve Page </h1>
+
+<%= form_for @post do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :post_title %>
+    <%= form.text_field :post_title, disabled:true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :slug %>
+    <%= form.text_area :slug, disabled:true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, [["Approved", '1'], ["Not Approved", '0']] ,{:prompt => 'Select One'}%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+  <%= link_to 'Back', posts_path %>
+
+<% end %>
+

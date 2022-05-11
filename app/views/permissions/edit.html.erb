@@ -1,0 +1,43 @@
+<h1>Editing Permission</h1>
+
+<%#= render 'form', permission: @permission %>
+<%= form_for @permission do |form| %>
+  <% if @permission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@permission.errors.count, "error") %> prohibited this permission from being saved:</h2>
+
+      <ul>
+        <% @permission.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :permission_name %>
+    <%= form.text_field :permission_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :permission_slug %>
+    <%= form.text_field :permission_slug %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, [["Approved", '1'], ["Not Approved", '0']] ,{:prompt => 'Select One'}%>
+  </div>
+
+  <div class="field">
+    <%= form.label :flag %>
+    <%= form.text_field :flag %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @permission %> |
+<%= link_to 'Back', permissions_path %>

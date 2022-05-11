@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1> <br>
+<%=form_tag posts_path, method: :get do %>
+  <%= select_tag("approved_posts_status",options_for_select([["Approved",'1'],["Not Approved",'0'],["New Posts",'' ]]), {:prompt => "Select One"})%>
+  <%= submit_tag 'Search' %>
+<% end %>
+<%= button_to "Reset", posts_path, method: :get%> <br>
+<div class="table-responsive">
+  <table class="table table-dark table-striped">
+    <thead >
+    <tr>
+      <th>Post title</th>
+      <th>Slug</th>
+      <th>Deleted</th>
+      <th>Status</th>
+      <th>Image</th>
+      <th>Post By</th>
+      <th>Restore Record</th>
+      <th colspan="3">Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.post_title %></td>
+        <td><%= post.slug %></td>
+        <td><%= post.discarded? ? 'deleted':'not deleted'%></td>
+        <% if post.status == 1 %>
+          <td><%= "Approved" %> </td>
+        <% elsif post.status == 0 %>
+          <td> <%= "Not Approved" %></td>
+        <% else %>
+          <td> <%= "New Posts" %></td>
+        <% end %>
+        <td><%= image_tag(post.image, width:"30") if post.image.attached?%></td>
+        <td><%= post.user.name %></td>
+        <td>
+          <% if post.discarded? %>
+            <%= check_box_tag nil, nil, false,{onclick:"restore_record()", id:'checkbox_tag'}%>
+            <%= button_to 'Save', restore_record_posts_path(restore:post.id), {style: "display:none", id:'restore_data'}%>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+<%= paginate @posts %>
+<%= link_to 'New Post', new_post_path %>
+
+<script>
+    function restore_record(){
+        var checkbox = document.getElementById('checkbox_tag')
+        var restore_button = document.getElementById('restore_data')
+        if (checkbox.checked == true){
+            restore_button.style.display = "inline-block"
+        }else{
+            restore_button.style.display = "none"
+            console.log("not checked")
+        }
+    }
+</script>

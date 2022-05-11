@@ -1,0 +1,30 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+<%# if user_signed_in? %>
+<!--<h2>Logged user info:<%#=check_permission(current_user, ManageAuthorize::Permission_slug_list[:edit_post]) %></h2>-->
+<%# end %>
+<div class="table-responsive">
+  <table class="table table-dark table-striped">
+    <thead>
+    <tr>
+      <td>Author Name</td>
+      <td>Image</td>
+      <td>Posts</td>
+      <td>Posted date</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%=post.user.name %></td>
+        <td><%=image_tag(post.image, width:"50") if post.image.attached? %></td>
+        <td><%=post.slug %></td>
+        <td><%=post.created_at %></td>
+      </tr>
+    <% end %>
+    </tbody>
+
+  </table>
+</div>
+<%= paginate @posts %>

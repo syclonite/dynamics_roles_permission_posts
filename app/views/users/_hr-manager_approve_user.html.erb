@@ -1,0 +1,61 @@
+<h1>Approve User page</h1>
+
+<%#= render 'form', user: @user %>
+<%= form_for(@user) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if has_role(current_user,"hr-manager")  %>
+    <%= @user.name %> <br>
+  <% end %>
+  <br>
+
+    <% if check_permission(current_user, ManageAuthorize::Permission_slug_list[:approve_employee]) %>
+      <div class="field">
+        <%= form.label :status %>
+        <%= form.select :status, [["Approved", '1'], ["Not Approved", '0']] ,{:prompt => 'Select One'}, onchange: "approved_by(`#{current_user.id}`)"%>
+        <%= form.hidden_field :approved_by, {id:"approved_by_user_id"} %>
+      </div>
+    <% end %>
+
+
+    <div class="field">
+      <%= form.label "Roles Names:" %>
+      <% @roles.each do |role| %>
+        <%= check_box_tag 'role_ids[]', role.id ,@user.roles.include?(role)%>
+        <%= role.role_name %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= form.label "Permissions Names:" %>
+      <% @permissions.each do |permission| %>
+        <%= check_box_tag "permission_ids[]", permission.id,@user.permissions.include?(permission)%>
+        <%= permission.permission_name %>
+      <% end %>
+    </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>
+
+<script>
+    function approved_by(current_user_id) {
+        var approved_id = document.getElementById('approved_by_user_id');
+        approved_id.value = current_user_id;
+    }
+</script>
